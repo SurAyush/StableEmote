@@ -24,6 +24,10 @@ This project demonstrates a lightweight and efficient approach to personalizatio
 
 ---
 
+## ⚙️ Architecture
+
+![Stable_Diffusion_Architecture](stable-diffusion.png)
+
 ## ⚙️ Training Details
 
 | Parameter | Value |
@@ -99,9 +103,12 @@ This project demonstrates a lightweight and efficient approach to personalizatio
 ---
 
 
-## Loss_Plot from W&B
+## 🧠📊 Loss_Plot from W&B
 
 ![Loss_PLot](training/W&B_Chart.png)
+
+---
+
 ## 🔗 Resources
 
 - **Dataset:** [Emoji Dataset](https://huggingface.co/datasets/valhalla/emoji-dataset)
