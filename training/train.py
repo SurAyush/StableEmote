@@ -32,7 +32,7 @@ from diffusers.utils import check_min_version, convert_state_dict_to_diffusers
 from diffusers.utils.import_utils import is_xformers_available
 from diffusers.utils.torch_utils import is_compiled_module
 
-logger = get_logger(__name__, log_level="INFO")
+logger = get_logger(__name__, log_level="INFO")       # doesn't log debug messages
 
 # Will error if the minimal version of diffusers necessary is not installed
 check_min_version("0.36.0.dev0")
@@ -64,7 +64,7 @@ def train():
         datasets.utils.logging.set_verbosity_warning()
         transformers.utils.logging.set_verbosity_warning()
         diffusers.utils.logging.set_verbosity_info()
-    else:
+    else:   # other process with only log errors
         datasets.utils.logging.set_verbosity_error()
         transformers.utils.logging.set_verbosity_error()
         diffusers.utils.logging.set_verbosity_error()
@@ -84,7 +84,7 @@ def train():
             ).repo_id
 
     # Load scheduler, tokenizer and models.
-    noise_scheduler = DDPMScheduler.from_pretrained(config.pretrained_model_name_or_path, subfolder="scheduler")
+    noise_scheduler = DDPMScheduler.from_pretrained(config.pretrained_model_name_or_path, subfolder="scheduler")   # cosine scehdule
     tokenizer = CLIPTokenizer.from_pretrained(config.pretrained_model_name_or_path, subfolder="tokenizer")
     text_encoder = CLIPTextModel.from_pretrained(config.pretrained_model_name_or_path, subfolder="text_encoder")
     vae = AutoencoderKL.from_pretrained(config.pretrained_model_name_or_path, subfolder="vae")
@@ -114,7 +114,7 @@ def train():
     vae.to(accelerator.device, dtype=weight_dtype)
     text_encoder.to(accelerator.device, dtype=weight_dtype)
 
-    unet.add_adapter(unet_lora_config)
+    unet.add_adapter(unet_lora_config)        # add LoRA layers to unet
     if config.mixed_precision == "fp16":
         cast_training_params(unet, dtype=torch.float32)
 
@@ -262,6 +262,19 @@ def train():
             accelerator.print(f"Resuming from checkpoint {path}")
             accelerator.load_state(os.path.join(config.output_dir, path))
             global_step = int(path.split("-")[1])
+
+            # Loading LoRA weights
+            unet_lora_path = os.path.join(config.output_dir, path, "pytorch_lora_weights.safetensors") 
+            if os.path.exists(unet_lora_path): 
+                # Import here to avoid unnecessary dependency if not resuming from checkpoint 
+                from safetensors.torch import load_file 
+                lora_state_dict = load_file(unet_lora_path) 
+                unwrapped_unet = unwrap_model(unet) 
+                unwrapped_unet.load_state_dict(lora_state_dict, strict=False) 
+                logger.info(f"Successfully loaded LoRA weights from {unet_lora_path}") 
+            else: 
+                # If LoRA weights are not found, throw a warning and continue without loading them 
+                logger.warning( f"LoRA weights not found at {unet_lora_path}. Continuing with optimizer/scheduler state only." )
 
             initial_global_step = global_step
             first_epoch = global_step // num_update_steps_per_epoch
