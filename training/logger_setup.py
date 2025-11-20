@@ -10,13 +10,13 @@ def log_validation(logger, pipeline,config,accelerator,epoch,is_final_validation
     logger.info(f"Running validation... \n Generating {config.num_validation_images} images with prompt:"f" {config.validation_prompt}.")
 
     pipeline = pipeline.to(accelerator.device)
-    pipeline.set_progress_bar_config(disable=True)
+    pipeline.set_progress_bar_config(disable=True)       # freezes progress bar for validation
     generator = torch.Generator(device=accelerator.device)
     if config.seed is not None:
         generator = generator.manual_seed(config.seed)
     
     images = []
-    autocast_ctx = torch.autocast(accelerator.device.type)
+    autocast_ctx = torch.autocast(accelerator.device.type)     # automatic mixed precision
 
     with autocast_ctx:
         for _ in range(config.num_validation_images):
