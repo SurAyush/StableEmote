@@ -94,7 +94,7 @@ This project demonstrates a lightweight and efficient approach to personalizatio
 
 
 
-> Note: Model got the rough understanding of what exactly an emoji like image means in 4.5 iterations. The image generation difference is evident of that.  
+> Note: Model got the rough understanding of what exactly an emoji like image means in 4.5k iterations. The image generation difference is evident of that.  
 > Extended training (~10k steps) is expected to yield more consistent and expressive results — planned for future iterations.
 > Check out the inference notebooks for detailed image generation results
 
