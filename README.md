@@ -115,7 +115,7 @@ This project demonstrates a lightweight and efficient approach to personalizatio
 
 - **Dataset:** [Emoji Dataset](https://huggingface.co/datasets/valhalla/emoji-dataset)
 - **Base Model (SD 1.5):** [Hugging Face Link](https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5)
-- **Fine-tuned Model Checkpoints:** [LoRA weigths](https://huggingface.co/SurAyush/StableEmote-lora)
+- **Fine-tuned Model Checkpoints:** [LoRA weigths](https://huggingface.co/SurAyush/StableEmote_LoRA)
 
 ---
 
