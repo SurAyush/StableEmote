@@ -91,7 +91,8 @@ This project demonstrates a lightweight and efficient approach to personalizatio
 |---|---|
 | ![](fine_tuned_model_generation/smiling_face_with_open_mouth_1.png) <br> **Smiling Face (Fine-tuned)** | ![](fine_tuned_model_generation/cat_face_2.png) <br> **Cat Face (Fine-tuned)** |
 | ![](fine_tuned_model_generation/fairy_2.png) <br> **Fairy (Fine-tuned)** | ![](fine_tuned_model_generation/supervillain_1.png) <br> **Supervillain (Fine-tuned)** |
-
+| ![](fine_tuned_model_generation/car_1.png) <br> **Car (Fine-tuned)** | ![](fine_tuned_model_generation/sc_1.png) <br> **Santa Claus (Fine-tuned)** |
+| ![](fine_tuned_model_generation/monkey_2.png) <br> **Monkey (Fine-tuned)** | ![](fine_tuned_model_generation/gitt_1.png) <br> **Giraffe (Fine-tuned)** |
 
 
 > Note: Model got the rough understanding of what exactly an emoji like image means in 4.5k iterations. The image generation difference is evident of that.  
