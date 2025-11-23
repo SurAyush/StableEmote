@@ -33,13 +33,13 @@ This project demonstrates a lightweight and efficient approach to personalizatio
 | Parameter | Value |
 |------------|--------|
 | **Base Model** | Stable Diffusion 1.5 |
-| **Training Steps** | 3500 |
+| **Training Steps** | 4500 |
 | **Batch Size** | 8 |
 | **Resolution** | 256 × 256 |
 | **Precision** | bf16 (mixed precision) |
 | **Learning Rate** | 1e-4 |
 | **Hardware** | Google Colab T4 (16 GB VRAM) |
-| **Training Time** | ~4–5 hours |
+| **Training Time** | ~6–7 hours |
 | **Logging** | Weights & Biases (wandb) |
 | **LoRA Target** | UNet (VAE & CLIP frozen) |
 
@@ -79,41 +79,43 @@ This project demonstrates a lightweight and efficient approach to personalizatio
 
 ### 🎨 Pre-trained Model (Stable Diffusion 1.5)
 
-![Fine-tuned emoji sample](base_model_generations/smiling_face_with_open_mouth.png)
-
-![Fine-tuned emoji sample](base_model_generations/winking_face.png)
-
-![Fine-tuned emoji sample](base_model_generations/emoji%20of%20robot_face.png)
+| | |
+|---|---|
+| ![](base_model_generations/smiling_face_with_open_mouth.png) <br> **Smiling Face (Base)** | ![](base_model_generations/smiling_cat.png) <br> **Smiling Cat (Base)** |
+| ![](base_model_generations/fairy.png) <br> **Fairy (Base)** | ![](base_model_generations/crying_face.png) <br> **Crying Face (Base)** |
 
 
 ### 🧑‍🎨 Fine-tuned Model (StableEmote)
 
-![Fine-tuned emoji sample](fine_tuned_model_generation/smiling_face_3.png)
-
-![Fine-tuned emoji sample](fine_tuned_model_generation/smiling_face_4.png)
-
-![Fine-tuned emoji sample](fine_tuned_model_generation/robot_face.png)
-
-![Fine-tuned emoji sample](fine_tuned_model_generation/robot_face_2.png)
+| | |
+|---|---|
+| ![](fine_tuned_model_generation/smiling_face_with_open_mouth_1.png) <br> **Smiling Face (Fine-tuned)** | ![](fine_tuned_model_generation/cat_face_2.png) <br> **Cat Face (Fine-tuned)** |
+| ![](fine_tuned_model_generation/fairy_2.png) <br> **Fairy (Fine-tuned)** | ![](fine_tuned_model_generation/supervillain_1.png) <br> **Supervillain (Fine-tuned)** |
 
 
-> Note: Image generation quality may show inconsistencies due to limited training (3.5k steps).  
+
+> Note: Model got the rough understanding of what exactly an emoji like image means in 4.5k iterations. The image generation difference is evident of that.  
 > Extended training (~10k steps) is expected to yield more consistent and expressive results — planned for future iterations.
+> Check out the inference notebooks for detailed image generation results
 
 ---
 
 
-## 🧠📊 Loss_Plot from W&B
+## 🧠📊 Loss Plot
 
-![Loss_PLot](training/W&B_Chart.png)
+![Loss Plot](loss.png)
+
+**Average Loss (first 500 steps):** 0.06776419130712748  
+**Average Loss (last 500 steps):** 0.06440320606157184
 
 ---
+
 
 ## 🔗 Resources
 
 - **Dataset:** [Emoji Dataset](https://huggingface.co/datasets/valhalla/emoji-dataset)
 - **Base Model (SD 1.5):** [Hugging Face Link](https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5)
-- **Fine-tuned Model Checkpoints:** [LoRA weigths](https://huggingface.co/SurAyush/StableEmote-lora)
+- **Fine-tuned Model Checkpoints:** [LoRA weigths](https://huggingface.co/SurAyush/StableEmote_LoRA)
 
 ---
 
